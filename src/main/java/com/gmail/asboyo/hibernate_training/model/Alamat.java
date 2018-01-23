@@ -35,6 +35,8 @@ public class Alamat {
     @JoinColumn(name = "id_kecamatan")
     private Kecamatan kecamatan;
     
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "alamat", fetch = FetchType.LAZY)
+    private Student student;
     
     public int getId() {
         return id;
@@ -59,6 +61,13 @@ public class Alamat {
     public void setKecamatan(Kecamatan kecamatan) {
         this.kecamatan = kecamatan;
     }
-    
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
     
 }

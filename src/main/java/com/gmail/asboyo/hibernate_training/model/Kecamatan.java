@@ -5,11 +5,14 @@
  */
 package com.gmail.asboyo.hibernate_training.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +30,9 @@ public class Kecamatan {
     @Column(name="nama")
     private String nama;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "kecamatan", fetch = FetchType.LAZY)
+    private Alamat alamat;
+    
     public int getId() {
         return id;
     }
@@ -42,6 +48,13 @@ public class Kecamatan {
     public void setNama(String nama) {
         this.nama = nama;
     }
-    
+
+    public Alamat getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(Alamat alamat) {
+        this.alamat = alamat;
+    }
     
 }

@@ -5,11 +5,14 @@
  */
 package com.gmail.asboyo.hibernate_training.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,6 +29,9 @@ public class Department extends BaseClass {
     
     @Column(name="nama_dept", length = 160)
     private String namaDepartment;
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "department", fetch = FetchType.LAZY)
+    private Employee employee;
 
     public Integer getId_departement() {
         return id_departement;
@@ -41,5 +47,13 @@ public class Department extends BaseClass {
 
     public void setNama(String nama) {
         this.namaDepartment = nama;
+    }
+    
+    public Employee getEmployee(){
+        return this.employee;
+    }
+    
+    public void setEmployee(Employee employee){
+        this.employee = employee;
     }
 }
