@@ -5,7 +5,11 @@
  */
 package com.gmail.asboyo.hibernate_training;
 
+import com.gmail.asboyo.hibernate_training.model.Alamat;
+import com.gmail.asboyo.hibernate_training.model.Department;
 import com.gmail.asboyo.hibernate_training.model.Employee;
+import com.gmail.asboyo.hibernate_training.model.Kecamatan;
+import com.gmail.asboyo.hibernate_training.model.Student;
 import com.gmail.asboyo.hibernate_training.util.HibernateUtil;
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,12 +25,14 @@ public class MainProgram {
         session.beginTransaction();
         
         String result = getNativeQuery(session, "select version()");
+        System.out.println("Menapilkan Result! : ");
         System.out.println(result);
         
-        simpanPegawai(session);
+        //simpanPegawai(session);
         //updatePegawai(session);
         //updatePegawaiDua(session);
         //deletePegawai(session);
+        simpanStudent(session);
         List<Employee> listPegawai = getListPegawai(session);
         for(Employee employee : listPegawai){
             System.out.println(employee.getNama());
@@ -34,14 +40,34 @@ public class MainProgram {
         session.getTransaction().commit();
         session.close();
         HibernateUtil.shutdown();
+        //System.out.println(student.getNama()+" "+student.getAlamat().getNama()+" "+student.getAlamat().getKecamatan().getNama());      
     }
     private static Integer simpanPegawai(Session session){
+        Department dep = new Department();
+        dep.setNama("DIV IT");
+        dep.setIdEntry("userdept");
+        dep.setTglEntry(new Timestamp(System.currentTimeMillis()));
         Employee emp = new Employee();
-        emp.setNama("Erazor Djinn");
-        emp.setAlamat("jln purwodadi");
-        emp.setIdEntry("user4");
+        emp.setNama("Peter J. Clapton");
+        emp.setAlamat("jln nugini");
+        emp.setIdEntry("user5");
         emp.setTglEntry(new Timestamp(System.currentTimeMillis()));
+        emp.setDepartment(dep);
         return (Integer) session.save(emp);
+    }
+    //latihan kecamatan, student, alamat
+    private static Integer simpanStudent(Session session){
+        Kecamatan kec = new Kecamatan();
+        kec.setNama("Kecamatan wololo");
+        Alamat a = new Alamat();
+        a.setNama("Jalan huruhura");
+        a.setKecamatan(kec);
+        Student student = new Student();
+        student.setNama("Rubal");
+        student.setAlamat(a);
+        student.setIdEntry("stu01");
+        student.setTglEntry(new Timestamp(System.currentTimeMillis()));
+        return (Integer) session.save(student);
     }
     
     private static String getNativeQuery(Session session, String sql){

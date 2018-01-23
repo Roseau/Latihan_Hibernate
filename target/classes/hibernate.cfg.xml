@@ -13,5 +13,9 @@ and open the template in the editor.
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hbm2ddl.auto">update</property>
         <mapping class="com.gmail.asboyo.hibernate_training.model.Employee"/>
+        <mapping class="com.gmail.asboyo.hibernate_training.model.Department"/>
+        <mapping class="com.gmail.asboyo.hibernate_training.model.Student"/>
+        <mapping class="com.gmail.asboyo.hibernate_training.model.Alamat"/>
+        <mapping class="com.gmail.asboyo.hibernate_training.model.Kecamatan"/>
     </session-factory>
 </hibernate-configuration> 

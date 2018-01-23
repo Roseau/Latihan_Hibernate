@@ -21,23 +21,20 @@ import javax.persistence.Table;
  * @author St0rm
  */
 @Entity
-@Table(name="pegawai", schema="public")//optional, bila tidak ada, nama kelas akan dibuatkan, biasanya dengan huruf kecil
-public class Employee extends BaseClass {
+@Table(name = "siswa", schema="public")
+public class Student extends BaseClass {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO) // membuat id menjadi auto generated(dapat dirubah sesuai kebutuhan, bila ingin custom, bisa menggunakan class)
-    @Column(name="id", updatable= false, nullable = false) // nullable berarti tidak boleh null
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id_student", updatable= false, nullable = false)
     private int id;
     
-    @Column(name="nama", length=50)//panjang dari input yang dimasukkan
+    @Column(name = "nama")
     private String nama;
     
-    @Column(name="alamat", length=150)
-    private String alamat;
-    
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_dept")
-    private Department department;
-    
+    @JoinColumn(name = "id_alamat")
+    private Alamat alamat;
+
     public int getId() {
         return id;
     }
@@ -54,22 +51,13 @@ public class Employee extends BaseClass {
         this.nama = nama;
     }
 
-    public String getAlamat() {
+    public Alamat getAlamat() {
         return alamat;
     }
 
-    public void setAlamat(String alamat) {
+    public void setAlamat(Alamat alamat) {
         this.alamat = alamat;
     }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-    
     
     
 }
