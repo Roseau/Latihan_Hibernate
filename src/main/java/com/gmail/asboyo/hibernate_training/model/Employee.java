@@ -5,6 +5,8 @@
  */
 package com.gmail.asboyo.hibernate_training.model;
 
+import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -37,6 +40,9 @@ public class Employee extends BaseClass {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_dept")
     private Department department;
+    
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "employee")
+    private Set<Task> listTask;
     
     public int getId() {
         return id;
@@ -68,6 +74,14 @@ public class Employee extends BaseClass {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Set<Task> getListTask() {
+        return listTask;
+    }
+
+    public void setListTask(Set<Task> listTask) {
+        this.listTask = listTask;
     }
     
     
