@@ -32,7 +32,7 @@ public class MainProgram {
         //updatePegawai(session);
         //updatePegawaiDua(session);
         //deletePegawai(session);
-        simpanStudent(session);
+//        simpanStudent(session);
 //        List<Employee> listPeg = getListPegawaiDanDept(session);
 //        for(Employee employee : listPeg){
 //            System.out.println(employee.getNama()+"  dept "+employee.getDepartment().getNama());
@@ -46,9 +46,20 @@ public class MainProgram {
 //            System.out.println(employee.getNama());
 //        }
 //        session.getTransaction().commit();
-        List<Student> listStudent = getListFromStudent(session);
-        for(Student student : listStudent){
-            System.out.println(student.getNama()+"  alamat "+student.getAlamat().getNama()+"  kecamatan "+student.getAlamat().getKecamatan().getNama());
+        //mengambil list student
+//        List<Student> listStudent = getListFromStudent(session);
+//        for(Student student : listStudent){
+//            System.out.println(student.getNama()+"  alamat "+student.getAlamat().getNama()+"  kecamatan "+student.getAlamat().getKecamatan().getNama());
+//        }
+        //mengambil list alamat
+//        List<Alamat> listAlamat = getListFromAlamat(session);
+//        for(Alamat alamat : listAlamat){
+//            System.out.println(alamat.getNama()+"  Student "+alamat.getStudent().getNama()+"  kecamatan "+alamat.getKecamatan().getNama());
+//        }
+        //mengambil list kecamatan
+        List<Kecamatan> listKecamatan = getListFromKecamatan(session);
+        for(Kecamatan kec : listKecamatan){
+            System.out.println(kec.getNama()+"  alamat "+kec.getAlamat().getNama()+"  student "+kec.getAlamat().getStudent().getNama());
         }
         session.close();
         HibernateUtil.shutdown();
@@ -117,5 +128,17 @@ public class MainProgram {
     
     private static List<Student> getListFromStudent(Session session){
         return session.createQuery("Select s from Student s JOIN FETCH s.alamat").getResultList();
+    }
+    
+    private static List<Alamat> getListFromAlamat(Session session){
+        return session.createQuery("Select a from Alamat a JOIN FETCH a.student").getResultList();
+    }
+    
+    private static List<Alamat> getListFromAlamatKecamatan(Session session){
+        return session.createQuery("Select a from Alamat a JOIN FETCH a.kecamatan").getResultList();
+    }
+    
+    private static List<Kecamatan> getListFromKecamatan(Session session){
+        return session.createQuery("Select k from Kecamatan k JOIN FETCH k.alamat").getResultList();
     }
 }
