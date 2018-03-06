@@ -36,7 +36,6 @@ public class Kota extends Base{
     @JoinColumn(name = "id_propinsi")
     private Provinsi provinsi;
     
-    
     public int getId() {
         return id;
     }
